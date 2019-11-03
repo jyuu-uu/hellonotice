@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView btn1, btn2;
     ListView list1, list2;
-    ScrapAdapter adapter;
+    MainAdapter adapter;
     ArrayList<Post> data;
     TextView t1, t2;
     Intent getfromadd;
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         data.add(new Post("공지3 제목", "공지3 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 크림떡볶이 먹고싶다"));
         data.add(new Post("공지4 제목", "어쩌구 저쩌구 대충 웹 크롤링한 척 화양156 크림떡볶이 격하게 먹고 싶다 근데 배는 안고프다 그냥 먹고 싶을 뿐이다 이서희 바보 멍청이 똥깨 화장실은 왜 막아"));
         data.add(new Post("공지5 제목", "공지5 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 크림떡볶이 먹고싶다"));
-        adapter = new ScrapAdapter(getApplicationContext(), R.layout.list_item, data);
+        adapter = new MainAdapter(getApplicationContext(), R.layout.main_item, data);
         list1.setAdapter(adapter);
         if (category2 != null) {
             list2.setAdapter(adapter);

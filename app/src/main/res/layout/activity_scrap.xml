@@ -12,40 +12,20 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/colorPrimary"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:text="Scrap"
+            android:gravity="bottom|start"
+            android:paddingLeft="30dp"
+            android:paddingBottom="20dp"
+            android:textStyle="bold|italic"
+            android:textColor="#FFFFFF"
+            android:textSize="36sp"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp">
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/roundtext" />
-
-            <ImageView
-                android:id="@+id/searchBtn_scrap"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitCenter"
-                android:background="@drawable/selector_search" />
-
-            <ImageView
-                android:id="@+id/scrapBtn_scrap"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:background="@drawable/selector_scrap" />
-
-        </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 

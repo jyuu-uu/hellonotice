@@ -19,6 +19,8 @@ public class ScrapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrap);
+        init();
+        addListener();
     }
     private void addListener() {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -38,9 +40,9 @@ public class ScrapActivity extends AppCompatActivity {
         data.add(new Post("공지3 제목", "공지3 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 크림떡볶이 먹고싶다"));
         data.add(new Post("공지4 제목", "공지4 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 양념막창 먹고싶다"));
         data.add(new Post("공지5 제목", "공지5 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 소곱창 먹고싶다"));
-        adapter = new ScrapAdapter(getApplicationContext(), R.layout.list_item, data);
+        adapter = new ScrapAdapter(getApplicationContext(), R.layout.scrap_item, data);
 
-        list = findViewById(R.id.search_list);
+        list = findViewById(R.id.scrap_list);
         list.setAdapter(adapter);
     }
 }
