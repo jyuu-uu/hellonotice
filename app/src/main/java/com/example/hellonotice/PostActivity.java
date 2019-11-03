@@ -8,10 +8,18 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class PostActivity extends AppCompatActivity {
     Post p;
     TextView t1, t2;
     ImageButton btn;
+
+    DatabaseReference rdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +28,6 @@ public class PostActivity extends AppCompatActivity {
         Intent intent = getIntent();
         p = (Post)intent.getSerializableExtra("post");
         init();
-
 
         btn.setOnClickListener(new ImageButton.OnClickListener(){
             @Override
@@ -34,11 +41,24 @@ public class PostActivity extends AppCompatActivity {
                     p.setScrap(true);
                     btn.setImageResource(R.drawable.scrap_btn_pink);
                 }
-
-                //Log.i("datanoti", "값 바꼇능가,,");
+                postFirebaseDatabase(true);
             }
         });
     }
+
+    public void postFirebaseDatabase(boolean add){
+        rdb = FirebaseDatabase.getInstance().getReference();
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> postValues = null;
+        if(add){
+            Post post = new Post(p.getTitle(), p.getContent(), p.isScrap());
+            post.setId(p.getId());
+            postValues = post.toMap();
+        }
+        childUpdates.put("/post_list/" + p.getId(), postValues);
+        rdb.updateChildren(childUpdates);
+    }
+
 
     private void init() {
         t1 = findViewById(R.id.post_title);
