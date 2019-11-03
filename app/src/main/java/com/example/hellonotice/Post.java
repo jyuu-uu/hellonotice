@@ -1,6 +1,8 @@
 package com.example.hellonotice;
 
-public class Post {
+import java.io.Serializable;
+
+public class Post implements Serializable {
     public String title;
     public String content;
 
@@ -34,5 +36,9 @@ public class Post {
         this.title = s1;
         this.content = s2;
         scrap = false;
+    }
+    public Post(String s1, String s2, boolean b) {
+        this(s1, s2);
+        scrap = b;
     }
 }
