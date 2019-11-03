@@ -175,12 +175,19 @@ public class SearchActivity extends AppCompatActivity {
         data = new ArrayList<>();
         data.clear();
         adapter = new SearchActivityAdapter(getApplicationContext(), R.layout.main_item, data);
-        data.add(new Post("존나 제목", "존나 내용", false));
 
         list1.setAdapter(adapter);
         if (category2 != null) {
             list2.setAdapter(adapter);
         }
+
+        search = getIntent().getStringExtra("searchtext");
+        //edit = findViewById(R.id.searched_text);
+        //edit.setText(search);
+
+        //list = findViewById(R.id.search_list);
+        //list.setAdapter(adapter);
+
     }
 
     public void connectDB() {
@@ -214,8 +221,6 @@ public class SearchActivity extends AppCompatActivity {
     }
 
 }
-
-
 
 //package com.example.hellonotice;
 //
