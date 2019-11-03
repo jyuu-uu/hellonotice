@@ -20,6 +20,7 @@
             android:layout_weight="1.5"
             android:textSize="20sp"
             android:text="존나 공지 제목"
+            android:textColor="#3F3F3F"
             android:gravity="center_vertical"/>
 
         <TextView
@@ -31,6 +32,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:text="존나 공지 내용"
+            android:textColor="#747474"
             android:gravity="center_vertical"/>
 
     </LinearLayout>
