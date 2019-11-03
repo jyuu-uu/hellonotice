@@ -5,6 +5,11 @@ import java.io.Serializable;
 public class Post implements Serializable {
     public String title;
     public String content;
+    public boolean scrap;
+
+    public Post() {
+
+    }
 
     public String getTitle() {
         return title;
@@ -30,15 +35,13 @@ public class Post implements Serializable {
         this.scrap = scrap;
     }
 
-    public boolean scrap;
-
-    public Post(String s1, String s2) {
-        this.title = s1;
-        this.content = s2;
-        scrap = false;
+    public Post(String title, String content) {
+        this.title = title;
+        this.content = content;
+        this.scrap = false;
     }
-    public Post(String s1, String s2, boolean b) {
-        this(s1, s2);
-        scrap = b;
+    public Post(String title, String content, boolean scrap) {
+        this(title, content);
+        this.scrap = scrap;
     }
 }
