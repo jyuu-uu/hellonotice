@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         t2.setText(category2);
 
         data = new ArrayList<>();
+        data.clear();
         adapter = new MainAdapter(getApplicationContext(), R.layout.main_item, data);
         data.add(new Post("존나 제목", "존나 내용", false));
 
@@ -154,7 +155,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Post p = new Post("휴학생 계절학기 수강 안내애애", "내용 몰라", true);
-//        rdb.push().setValue(p);
     }
 }
