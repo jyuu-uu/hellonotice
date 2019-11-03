@@ -3,6 +3,8 @@ package com.example.hellonotice;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -18,6 +20,24 @@ public class PostActivity extends AppCompatActivity {
         Intent intent = getIntent();
         p = (Post)intent.getSerializableExtra("post");
         init();
+
+
+        btn.setOnClickListener(new ImageButton.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.i("scrap","btn 클릭");
+                if(p.isScrap()){
+                    p.setScrap(false);
+                    btn.setImageResource(R.drawable.scrap_btn);
+                }
+                else{
+                    p.setScrap(true);
+                    btn.setImageResource(R.drawable.scrap_btn_pink);
+                }
+
+                //Log.i("datanoti", "값 바꼇능가,,");
+            }
+        });
     }
 
     private void init() {

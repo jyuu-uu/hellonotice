@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         data = new ArrayList<>();
         data.clear();
         adapter = new MainAdapter(getApplicationContext(), R.layout.main_item, data);
-        data.add(new Post("존나 제목", "존나 내용", false));
+        //data.add(new Post("존나 제목", "존나 내용", false));
 
         list1.setAdapter(adapter);
         if (category2 != null) {
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         b = false;
                     }
                     Post p = new Post(s1, s2, b);
-                    //Log.i("DB확인", p.getTitle());
+                    Log.i("DB확인", p.getTitle());
                     data.add(p);
                 }
                 adapter.notifyDataSetChanged();
