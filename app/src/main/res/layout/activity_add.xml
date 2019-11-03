@@ -92,17 +92,23 @@
 
         <android.support.v4.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="100dp" />
+            android:layout_height="60dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="설정 기억하기"
+            android:layout_marginBottom="35dp"/>
 
         <TextView
             android:id="@+id/add_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="추가하기"
+            android:text="메인에 추가하기"
             android:textSize="20sp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:textStyle="bold"
