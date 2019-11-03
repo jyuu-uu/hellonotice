@@ -117,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         t2.setText(category2);
 
         data = new ArrayList<>();
-        data.clear();
         adapter = new MainAdapter(getApplicationContext(), R.layout.main_item, data);
         data.add(new Post("존나 제목", "존나 내용", false));
 
@@ -129,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void connectDB() {
 
-        rdb.addListenerForSingleValueEvent(new ValueEventListener() {
+        rdb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -143,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                         b = false;
                     }
                     Post p = new Post(s1, s2, b);
-                    //Log.i("DB확인", p.getTitle());
+                    Log.i("DB확인", p.getTitle());
                     data.add(p);
                 }
                 adapter.notifyDataSetChanged();
@@ -154,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        data.clear();
     }
+    
 }
