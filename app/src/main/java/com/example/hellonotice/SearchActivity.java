@@ -96,7 +96,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = FirebaseDatabase.getInstance();
-//        db.setPersistenceEnabled(true);
+        //db.setPersistenceEnabled(true);
         rdb = db.getReference("post_list");
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -152,13 +152,13 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        t2.setOnClickListener(new View.OnClickListener() {
+/*        t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SearchActivity.this, ListActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 
     private void init() {
@@ -166,27 +166,22 @@ public class SearchActivity extends AppCompatActivity {
         btn2 = findViewById(R.id.scrapBtn);
         edit = findViewById(R.id.search_text);
         list1 = findViewById(R.id.list1_main);
-        list2 = findViewById(R.id.list2_main);
+        //list2 = findViewById(R.id.list2_main);
         t1 = findViewById(R.id.main_category1);
-        t2 = findViewById(R.id.main_category2);
+        //t2 = findViewById(R.id.main_category2);
         t1.setText(category1);
-        t2.setText(category2);
+        //t2.setText(category2);
 
         data = new ArrayList<>();
         data.clear();
         adapter = new SearchActivityAdapter(getApplicationContext(), R.layout.main_item, data);
 
         list1.setAdapter(adapter);
-        if (category2 != null) {
-            list2.setAdapter(adapter);
-        }
+        //if (category2 != null) {
+        //    list2.setAdapter(adapter);
+        //}
 
         search = getIntent().getStringExtra("searchtext");
-        //edit = findViewById(R.id.searched_text);
-        //edit.setText(search);
-
-        //list = findViewById(R.id.search_list);
-        //list.setAdapter(adapter);
 
     }
 

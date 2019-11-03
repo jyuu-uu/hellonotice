@@ -32,7 +32,6 @@ public class ScrapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scrap);
 
         db = FirebaseDatabase.getInstance();
-        rdb = db.getReference("post_list");
 
         init();
         addListener();
@@ -64,7 +63,38 @@ public class ScrapActivity extends AppCompatActivity {
 
 
     public void connectDB() {
+        rdb = db.getReference("post_list");
+        rdb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String s1 = snapshot.child("title").getValue().toString();
+                        String s2 = snapshot.child("content").getValue().toString();
+                        String s3 = snapshot.child("scrap").getValue().toString();
+                        String s4 = snapshot.child("id").getValue().toString();
+                        boolean b = false;
+                        if (s3.equals("true")) {
+                            b = true;
+                        } else if (s3.equals("false")) {
+                            b = false;
+                        }
 
+                        if(s3.equals("true")){
+                            Post p = new Post(s4, s1, s2, b);
+                            Log.i("DB확인", p.getTitle());
+                            data.add(p);
+                        }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        rdb = db.getReference("post_list2");
         rdb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -73,7 +103,6 @@ public class ScrapActivity extends AppCompatActivity {
                     String s2 = snapshot.child("content").getValue().toString();
                     String s3 = snapshot.child("scrap").getValue().toString();
                     String s4 = snapshot.child("id").getValue().toString();
-
                     boolean b = false;
                     if (s3.equals("true")) {
                         b = true;
@@ -96,5 +125,35 @@ public class ScrapActivity extends AppCompatActivity {
             }
         });
 
+        rdb = db.getReference("post_list3");
+        rdb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String s1 = snapshot.child("title").getValue().toString();
+                    String s2 = snapshot.child("content").getValue().toString();
+                    String s3 = snapshot.child("scrap").getValue().toString();
+                    String s4 = snapshot.child("id").getValue().toString();
+                    boolean b = false;
+                    if (s3.equals("true")) {
+                        b = true;
+                    } else if (s3.equals("false")) {
+                        b = false;
+                    }
+
+                    if(s3.equals("true")){
+                        Post p = new Post(s4, s1, s2, b);
+                        Log.i("DB확인", p.getTitle());
+                        data.add(p);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
