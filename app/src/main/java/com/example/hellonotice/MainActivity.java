@@ -171,6 +171,14 @@ public class MainActivity extends AppCompatActivity {
             });
 
             list2.setAdapter(adapter2);
+            list2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(MainActivity.this, PostActivity.class);
+                    intent.putExtra("post", data2.get(position));
+                    startActivity(intent);
+                }
+            });
         }
     }
 
