@@ -55,6 +55,10 @@ public class Post implements Serializable {
         this(title, content);
         this.scrap = scrap;
     }
+    public Post(String id, String title, String content, boolean scrap) {
+        this(title, content, scrap);
+        this.id = id;
+    }
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();

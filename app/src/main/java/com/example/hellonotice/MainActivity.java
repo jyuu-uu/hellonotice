@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                     String s1 = snapshot.child("title").getValue().toString();
                     String s2 = snapshot.child("content").getValue().toString();
                     String s3 = snapshot.child("scrap").getValue().toString();
-//                    String s4 = snapshot.child("id").getValue().toString();
+                    String s4 = snapshot.child("id").getValue().toString();
 
                     boolean b = false;
                     if (s3.equals("true")) {
@@ -144,8 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     } else if (s3.equals("false")) {
                         b = false;
                     }
-                    Post p = new Post(s1, s2, b);
-                    //p.setId(s4);
+                    Post p = new Post(s4, s1, s2, b);
                     Log.i("DB확인", p.getTitle());
                     data.add(p);
                 }
