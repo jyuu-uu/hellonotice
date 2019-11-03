@@ -64,11 +64,13 @@ public class AddActivity extends AppCompatActivity {
         arr1.add("학교 홈페이지");
         arr1.add("학과 홈페이지");
 
+        arr2.add("");
         arr2.add("소프트웨어학과");
         arr2.add("컴퓨터공학과");
         arr2.add("전기전자공학부");
 
-        arr3.add("학사/장학");
+        arr3.add("학사");
+        arr3.add("장학");
         arr3.add("취창업/국제");
         arr3.add("학생/산학");
 

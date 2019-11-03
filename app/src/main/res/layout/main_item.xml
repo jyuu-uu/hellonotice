@@ -21,6 +21,8 @@
             android:textSize="18sp"
             android:text="존나 공지 제목"
             android:textColor="#3F3F3F"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:gravity="center_vertical"/>
 
         <TextView

@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,8 @@ public class SearchActivity extends AppCompatActivity {
     ListView list;
     ArrayList<Post> data;
     ListAdapter adapter;
+    String search;
+    EditText edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,10 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void init() {
+        search = getIntent().getStringExtra("searchtext");
+        edit = findViewById(R.id.searched_text);
+        edit.setText(search);
+
         data = new ArrayList<>();
         data.add(new Post("공지1 제목", "공지1 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척"));
         data.add(new Post("공지2 제목", "공지2 내용입니다. 아웃백 먹고싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다", true));

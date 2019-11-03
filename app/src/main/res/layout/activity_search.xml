@@ -25,10 +25,12 @@
             android:layout_marginBottom="20dp">
 
             <EditText
+                android:id="@+id/searched_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/roundtext" />
+                android:background="@drawable/roundtext"
+                android:textColor="#747474"/>
 
             <ImageView
                 android:id="@+id/searchBtn_scrap"
