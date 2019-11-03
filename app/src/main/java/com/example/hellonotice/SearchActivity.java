@@ -116,8 +116,9 @@ public class SearchActivity extends AppCompatActivity {
         category1 = " ";
         init();
         //call friebaseauth
-        connectDB();
         addListener();
+        connectDB();
+
     }
 
     private void addListener() {
@@ -159,6 +160,14 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });*/
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SearchActivity.this, PostActivity.class);
+                intent.putExtra("post", data.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
     private void init() {

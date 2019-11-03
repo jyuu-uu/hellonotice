@@ -50,6 +50,7 @@ public class AddActivity extends AppCompatActivity {
                 Intent intent = new Intent(AddActivity.this, MainActivity.class);
                 String s = "▶ "+sp1.getSelectedItem().toString()+" > "+sp2.getSelectedItem().toString()+" > "+sp3.getSelectedItem().toString();
                 intent.putExtra("category", s);
+                intent.putExtra("flag", "flase");
                 startActivity(intent);
             }
         });

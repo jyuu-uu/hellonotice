@@ -1,10 +1,12 @@
 package com.example.hellonotice;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView btn1, btn2;
     ListView list1, list2;
-    MainAdapter adapter;
-    ArrayList<Post> data;
+    MainAdapter adapter, adapter2;
+    ArrayList<Post> data, data2;
     TextView t1, t2;
     Intent getfromadd;
     EditText edit;
     String category1, category2;
-    FirebaseDatabase db;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference rdb;
 
     @Override
@@ -40,9 +42,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = FirebaseDatabase.getInstance();
-        db.setPersistenceEnabled(true);
-        rdb = db.getReference("post_list");
+        if(db == null){
+            db.setPersistenceEnabled(true);
+        }
+        else{
+            db = FirebaseDatabase.getInstance();
+            //db.setPersistenceEnabled(true);
+            rdb = db.getReference("post_list");
+        }
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
         init();
         connectDB();
         addListener();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
     }
 
     private void addListener() {
@@ -122,13 +137,46 @@ public class MainActivity extends AppCompatActivity {
         //data.add(new Post("존나 제목", "존나 내용", false));
 
         list1.setAdapter(adapter);
+
         if (category2 != null) {
-            list2.setAdapter(adapter);
+            data2 = new ArrayList<>();
+            data2.clear();
+            adapter2 = new MainAdapter(getApplicationContext(), R.layout.main_item, data2);
+
+            rdb = db.getReference("post_list3");
+            rdb.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String s1 = snapshot.child("title").getValue().toString();
+                        String s2 = snapshot.child("content").getValue().toString();
+                        String s3 = snapshot.child("scrap").getValue().toString();
+                        String s4 = snapshot.child("id").getValue().toString();
+
+                        boolean b = false;
+                        if (s3.equals("true")) {
+                            b = true;
+                        } else if (s3.equals("false")) {
+                            b = false;
+                        }
+                        Post p = new Post(s4, s1, s2, b);
+                        Log.i("DB확인", p.getTitle());
+                        data2.add(p);
+                    }
+                    adapter2.notifyDataSetChanged();
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            });
+
+            list2.setAdapter(adapter2);
         }
     }
 
     public void connectDB() {
 
+        rdb = db.getReference("post_list");
         rdb.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
