@@ -11,11 +11,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListAdapter extends ArrayAdapter {
+public class ScrapAdapter extends ArrayAdapter {
     Context context;
     ArrayList<Post> data;
 
-    public ListAdapter( Context context, int resource, ArrayList<Post> objects) {
+    public ScrapAdapter(Context context, int resource, ArrayList<Post> objects) {
         super(context, resource, objects);
         this.context = context;
         data = objects;

@@ -1,11 +1,13 @@
 package com.example.hellonotice;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ public class AddActivity extends AppCompatActivity {
     private Spinner sp1, sp2, sp3;
     private ArrayList<String> arr1, arr2, arr3, arr4;
     private ArrayAdapter<String> adap1, adap2, adap3, adap4;
+    private TextView addBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,15 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                String s = "▶ "+sp1.getSelectedItem().toString()+" > "+sp2.getSelectedItem().toString()+" > "+sp3.getSelectedItem().toString();
+                intent.putExtra("category", s);
+                startActivity(intent);
             }
         });
     }
@@ -75,5 +87,7 @@ public class AddActivity extends AppCompatActivity {
         sp1.setAdapter(adap1);
         sp2.setAdapter(adap2);
         sp3.setAdapter(adap3);
+
+        addBtn = findViewById(R.id.add_btn);
     }
 }
