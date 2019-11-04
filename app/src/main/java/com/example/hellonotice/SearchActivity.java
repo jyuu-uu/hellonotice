@@ -362,6 +362,7 @@
 //
 //}
 
+
 package com.example.hellonotice;
 
 import android.content.Intent;
@@ -442,11 +443,11 @@ public class SearchActivity extends AppCompatActivity {
         edit.setText(search);
 
         data = new ArrayList<>();
-        data.add(new Post("공지1 제목", "공지1 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척"));
-        data.add(new Post("공지2 제목", "공지2 내용입니다. 아웃백 먹고싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다", true));
-        data.add(new Post("공지3 제목", "공지3 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 크림떡볶이 먹고싶다"));
-        data.add(new Post("공지4 제목", "공지4 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 양념막창 먹고싶다"));
-        data.add(new Post("공지5 제목", "공지5 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 소곱창 먹고싶다"));
+//        data.add(new Post("공지1 제목", "공지1 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척 어쩌구 저쩌구 대충 웹 크롤링한 척"));
+//        data.add(new Post("공지2 제목", "공지2 내용입니다. 아웃백 먹고싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다 투움바 파스타 먹고 싶다", true));
+//        data.add(new Post("공지3 제목", "공지3 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 크림떡볶이 먹고싶다"));
+//        data.add(new Post("공지4 제목", "공지4 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 양념막창 먹고싶다"));
+//        data.add(new Post("공지5 제목", "공지5 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 소곱창 먹고싶다"));
 
         btn1 = findViewById(R.id.searchBtn);
         btn2 = findViewById(R.id.scrapBtn);
@@ -484,9 +485,12 @@ public class SearchActivity extends AppCompatActivity {
                     } else if (s3.equals("false")) {
                         b = false;
                     }
-                    Post p = new Post(s1, s2, b);
-                    //Log.i("DB확인", p.getTitle());
-                    data.add(p);
+
+                    if(s1.contains("2019")){
+                        Post p = new Post(s1, s2, b);
+                        //Log.i("DB확인", p.getTitle());
+                        data.add(p);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
