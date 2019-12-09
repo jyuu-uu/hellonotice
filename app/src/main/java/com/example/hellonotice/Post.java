@@ -1,14 +1,25 @@
 package com.example.hellonotice;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Post implements Serializable {
+    public String id;
     public String title;
     public String content;
     public boolean scrap;
 
     public Post() {
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -43,5 +54,18 @@ public class Post implements Serializable {
     public Post(String title, String content, boolean scrap) {
         this(title, content);
         this.scrap = scrap;
+    }
+    public Post(String id, String title, String content, boolean scrap) {
+        this(title, content, scrap);
+        this.id = id;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("id", this.getId());
+        result.put("content", this.getContent());
+        result.put("title", this.getTitle());
+        result.put("scrap", this.isScrap());
+        return result;
     }
 }
