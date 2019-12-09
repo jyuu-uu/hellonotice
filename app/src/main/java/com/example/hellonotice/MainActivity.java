@@ -1,5 +1,6 @@
 package com.example.hellonotice;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +8,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView btn1, btn2;
+    ImageView btn1;
     ListView list1, list2;
     MainAdapter adapter;
     ArrayList<Post> data;
@@ -34,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     String category1, category2;
     FirebaseDatabase db;
     DatabaseReference rdb;
+    FloatingActionButton fab, fab1, fab2;
+    private Animation fab_open, fab_close;
+    private Boolean isFabOpen = false;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +50,20 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         db.setPersistenceEnabled(true);
         rdb = db.getReference("post_list");
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-            }
-        });
+
+        mContext = getApplicationContext();
+        fab_open = AnimationUtils.loadAnimation(mContext, R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(mContext, R.anim.fab_close);
+
+        fab = findViewById(R.id.fab);
+        fab1 = findViewById(R.id.fab1);
+        fab2 = findViewById(R.id.fab2);
+
+        fab.setOnClickListener(new listener());
+        fab1.setOnClickListener(new listener());
+        fab2.setOnClickListener(new listener());
         getfromadd = getIntent();
         if (getfromadd != null) {
             category2 = getfromadd.getStringExtra("category");
@@ -64,6 +74,48 @@ public class MainActivity extends AppCompatActivity {
         addListener();
     }
 
+
+    public class listener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            int id = v.getId();
+            Intent intent;
+            switch (id) {
+                case R.id.fab:
+                    anim();
+                    break;
+                case R.id.fab1:
+                    anim();
+                    intent = new Intent(MainActivity.this, AddActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.fab2:
+                    anim();
+                    intent = new Intent(MainActivity.this, ScrapActivity.class);
+                    startActivity(intent);
+                    break;
+            }
+        }
+    }
+
+
+    public void anim() {
+
+        if (isFabOpen) {
+            fab1.startAnimation(fab_close);
+            fab2.startAnimation(fab_close);
+            fab1.setClickable(false);
+            fab2.setClickable(false);
+            isFabOpen = false;
+        } else {
+            fab1.startAnimation(fab_open);
+            fab2.startAnimation(fab_open);
+            fab1.setClickable(true);
+            fab2.setClickable(true);
+            isFabOpen = true;
+        }
+    }
+
     private void addListener() {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,13 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 intent.putExtra("searchtext", edit.getText().toString());
                 //Toast.makeText(getApplicationContext(), edit.getText(), Toast.LENGTH_SHORT).show();
-                startActivity(intent);
-            }
-        });
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ScrapActivity.class);
                 startActivity(intent);
             }
         });
@@ -107,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         btn1 = findViewById(R.id.searchBtn);
-        btn2 = findViewById(R.id.scrapBtn);
         edit = findViewById(R.id.search_text);
         list1 = findViewById(R.id.list1_main);
         list2 = findViewById(R.id.list2_main);
@@ -115,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
         t2 = findViewById(R.id.main_category2);
         t1.setText(category1);
         t2.setText(category2);
+
+
 
         data = new ArrayList<>();
         adapter = new MainAdapter(getApplicationContext(), R.layout.main_item, data);
@@ -127,14 +173,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void connectDB() {
-
         rdb.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //String pid = dataSnapshot.getValue().toString();
+                //Log.i("data",pid);
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String s3 = snapshot.child("scrap").getValue().toString();
                     String s1 = snapshot.child("title").getValue().toString();
                     String s2 = snapshot.child("content").getValue().toString();
-                    String s3 = snapshot.child("scrap").getValue().toString();
                     boolean b = false;
                     if (s3.equals("true")) {
                         b = true;
@@ -142,8 +189,8 @@ public class MainActivity extends AppCompatActivity {
                         b = false;
                     }
                     Post p = new Post(s1, s2, b);
-                    Log.i("DB확인", p.getTitle());
                     data.add(p);
+                    Log.i("DB확인", p.getTitle());
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -153,7 +200,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        data.clear();
     }
-    
+
 }
