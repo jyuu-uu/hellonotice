@@ -398,7 +398,7 @@ public class SearchActivity extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference rdb;
 
-    ImageView btn1, btn2;
+    ImageView btn1;
     ListView list1, list2;
     TextView t1, t2;
     Intent getfromadd;
@@ -450,7 +450,6 @@ public class SearchActivity extends AppCompatActivity {
 //        data.add(new Post("공지5 제목", "공지5 내용입니다. 어쩌구 저쩌구 대충 웹 크롤링한 척 소곱창 먹고싶다"));
 
         btn1 = findViewById(R.id.searchBtn);
-        btn2 = findViewById(R.id.scrapBtn);
         edit = findViewById(R.id.search_text);
         list1 = findViewById(R.id.list1_main);
         //list2 = findViewById(R.id.list2_main);
